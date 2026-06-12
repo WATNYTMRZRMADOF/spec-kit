@@ -18,13 +18,13 @@ class JarvisIntegration(SkillsIntegration):
     key = "jarvis"
     config = {
         "name": "OpenJarvis",
-        "folder": "./",
+        "folder": ".",
         "commands_subdir": "skills",
         "install_url": "https://open-jarvis.github.io/OpenJarvis/getting-started/install/",
         "requires_cli": True,
     }
     registrar_config = {
-        "dir": "./skills",
+        "dir": "skills",
         "format": "markdown",
         "args": "$ARGUMENTS",
         "extension": "/SKILL.md",

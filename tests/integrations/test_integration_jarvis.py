@@ -7,10 +7,14 @@ from .test_integration_base_skills import SkillsIntegrationTests
 
 class TestJarvisIntegration(SkillsIntegrationTests):
     KEY = "jarvis"
-    FOLDER = "./"
+    FOLDER = "."
     COMMANDS_SUBDIR = "skills"
-    REGISTRAR_DIR = "./skills"
+    REGISTRAR_DIR = "skills"
     CONTEXT_FILE = "AGENTS.md"
+
+    def _expected_files(self, script_variant: str) -> list[str]:
+        files = super()._expected_files(script_variant)
+        return sorted(path.removeprefix("./") for path in files)
 
 
 class TestJarvisExecArgs:
