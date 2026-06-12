@@ -177,6 +177,30 @@ class TestAgentConfigConsistency:
         """CLI help text for --ai should include iflow."""
         assert "iflow" in AI_ASSISTANT_HELP
 
+    # --- OpenJarvis consistency checks ---
+
+    def test_jarvis_in_agent_config(self):
+        """AGENT_CONFIG should include jarvis with workspace skills metadata."""
+        assert "jarvis" in AGENT_CONFIG
+        assert AGENT_CONFIG["jarvis"]["folder"] == "./"
+        assert AGENT_CONFIG["jarvis"]["commands_subdir"] == "skills"
+        assert AGENT_CONFIG["jarvis"]["requires_cli"] is True
+        assert AGENT_CONFIG["jarvis"]["install_url"] is not None
+
+    def test_jarvis_in_extension_registrar(self):
+        """Extension command registrar should include jarvis targeting workspace skills."""
+        cfg = CommandRegistrar.AGENT_CONFIGS
+
+        assert "jarvis" in cfg
+        assert cfg["jarvis"]["dir"] == "./skills"
+        assert cfg["jarvis"]["format"] == "markdown"
+        assert cfg["jarvis"]["args"] == "$ARGUMENTS"
+        assert cfg["jarvis"]["extension"] == "/SKILL.md"
+
+    def test_ai_help_includes_jarvis(self):
+        """CLI help text for --ai should include jarvis."""
+        assert "jarvis" in AI_ASSISTANT_HELP
+
     # --- Goose consistency checks ---
 
     def test_goose_in_agent_config(self):
